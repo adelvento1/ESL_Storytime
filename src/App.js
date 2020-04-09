@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, NavLink, HashRouter} from "react-router-dom";
+import { Route, HashRouter} from "react-router-dom";
 import Bookshelf from './components/Bookshelf';
 import "./index.css";
 import StoryPage from './components/StoryPage.js';
@@ -10,7 +10,6 @@ render(){
   return (
     <HashRouter>
     <div>
-      
       <div>
         <Route exact path="/" component={Bookshelf}/>
         <Route path="/:handle" component={StoryPage}/>
