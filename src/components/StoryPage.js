@@ -1,5 +1,6 @@
 import React from 'react';
-import StoryText from './StoryText.js';
+import ProgressBar from "react-scroll-progress-bar";
+import StoryText from '../assets/StoryText.js';
 import { NavLink } from "react-router-dom";
 import key from '../assets/key.js';
 
@@ -10,34 +11,30 @@ class StoryPage extends React.Component {
             story: StoryText[this.props.location.pathname.substr(1)]
         }
     }
-/**
- * Splits a string into an array of words using the space character
- * @param {*} storyString 
- */
+    /**
+     * Splits a string into an array of words using the space character
+     */
     storyToArray(storyString) {
         return storyString.split(" ");
     }
-/**
- * Checks whether a word is the new paragraph signal or not
- * @param {*} word 
- */
+    /**
+     * Checks whether a word is the new paragraph signal or not 
+     */
     isParagraph(word) {
         if (word === "/n") { return true; }
         else { return false; }
     }
-/**
- * Takes in a word and fetches its data from the dictionary api, then returns it
- * @param {*} word 
- */
+    /**
+     * Takes in a word and fetches its data from the dictionary api, then returns it 
+     */
     async getDef(word) {
         let url = `https://dictionaryapi.com/api/v3/references/learners/json/${word}?key=${key}`
         let response = await fetch(url);
         return await response.json();
     }
-/**
- * Takes in word from button, gets data and then shows data for word name and definition to user
- * @param {*} word 
- */
+    /**
+     * Takes in word from button, gets data and then shows data for word name and definition to user
+     */
     async printWordDef(word) {
         let data = await this.getDef(word);
         let wordName;
@@ -65,12 +62,15 @@ class StoryPage extends React.Component {
         let wordArray = this.storyToArray(this.state.story.Text);
         return (
             <div>
-                <ul className="header">
-                    <li><NavLink to="/">Bookshelf</NavLink></li>
+                <div>
+                    <ProgressBar bgcolor="#A3F6A0" duration="1"/>
+                 </div>
+                <ul class="header w3-button w3-black">
+                    <li ><NavLink to="/">Bookshelf</NavLink></li>
                 </ul>
                 <div className="rightPane">
-                    <h2 id="wordName" className="rightPaneText"> Click on a word you dont know and the definition will appear here. <br /> Haz clic en palabra que no sapas y la definición aparecerá aquí </h2>
-                    <h4 id="def" className="rightPaneText"></h4>
+                    <h3 id="wordName" className="rightPaneText"> Click on a word you dont know and the definition will appear here. <br /> Haz clic en palabra que no sapas y la definición aparecerá aquí </h3>
+                    <h5 id="def" className="rightPaneText"></h5>
                 </div>
                 <div className="mainPane" id="mainPane">
                     <div>
