@@ -1,6 +1,6 @@
 import React from 'react';
 import ProgressBar from "react-scroll-progress-bar";
-import StoryText from '../assets/StoryText.js';
+import Storys from '../assets/Storys.js';
 import { NavLink } from "react-router-dom";
 import key from '../assets/key.js';
 
@@ -8,15 +8,23 @@ class StoryPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            story: StoryText[this.props.location.pathname.substr(1)]
+            story: Storys[this.props.location.pathname.substr(1)],
+            storyText: "",
+            loaded: false
         }
     }
     /**
      * Splits a string into an array of words using the space character
      */
-    storyToArray(storyString) {
-        return storyString.split(" ");
+    async storyToArray(fileName) {
+        let text = await fetch(fileName.Text).then(r => r.text())
+        text = text.split(" ");
+        this.setState({
+            storyText: text,
+            loaded: true
+        })
     }
+
     /**
      * Checks whether a word is the new paragraph signal or not 
      */
@@ -59,37 +67,44 @@ class StoryPage extends React.Component {
     }
 
     render() {
-        let wordArray = this.storyToArray(this.state.story.Text);
-        return (
-            <div>
+        if (this.state.loaded == false) {
+            this.storyToArray(this.state.story)
+            return (
+                <div>Loading...</div>
+            )
+        } else {
+            let wordArray = this.state.storyText
+            return (
                 <div>
-                    <ProgressBar bgcolor="#A3F6A0" duration="1"/>
-                 </div>
-                <ul class="header w3-button w3-black">
-                    <li ><NavLink to="/">Bookshelf</NavLink></li>
-                </ul>
-                <div className="rightPane">
-                    <h3 id="wordName" className="rightPaneText"> Click on a word you dont know and the definition will appear here. <br /> Haz clic en palabra que no sapas y la definición aparecerá aquí </h3>
-                    <h5 id="def" className="rightPaneText"></h5>
-                </div>
-                <div className="mainPane" id="mainPane">
                     <div>
-                        {
-                            /**
-                             * On render - Creates a button for every word in the story string and then makes paragraph changes when the word is a '/n'
-                             */
-                            wordArray.map((value, index) => {
-                                if (this.isParagraph(value) === false) {
-                                    return <input key={index} className="btn" type="button" value={value} onClick={() => this.printWordDef(value)}></input>
-                                } else {
-                                    return <p />
-                                }
-                            })
-                        }
+                        <ProgressBar bgcolor="#A3F6A0" duration="1" />
+                    </div>
+                    <ul class="header w3-button w3-black">
+                        <li ><NavLink to="/">Bookshelf</NavLink></li>
+                    </ul>
+                    <div className="rightPane">
+                        <h3 id="wordName" className="rightPaneText"> Click on a word you dont know and the definition will appear here. <br /> Haz clic en palabra que no sapas y la definición aparecerá aquí </h3>
+                        <h5 id="def" className="rightPaneText"></h5>
+                    </div>
+                    <div className="mainPane" id="mainPane">
+                        <div>
+                            {
+                                /**
+                                 * On render - Creates a button for every word in the story string and then makes paragraph changes when the word is a '/n'
+                                 */
+                                wordArray.map((value, index) => {
+                                    if (this.isParagraph(value) === false) {
+                                        return <input key={index} className="btn" type="button" value={value} onClick={() => this.printWordDef(value)}></input>
+                                    } else {
+                                        return <p />
+                                    }
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 export default StoryPage;
