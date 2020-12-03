@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import banner from '../assets/Banner.png';
-import StoryText from '../assets/StoryText.js';
+import Storys from '../assets/Storys.js';
 import 'w3-css/w3.css';
 
 class Bookshelf extends Component {
@@ -37,8 +37,8 @@ class Bookshelf extends Component {
      */
     initialBookStack() {
         let loadedBooks = []
-        for (var i = 0; i < Object.keys(StoryText).length; i++) {
-            loadedBooks.push(Object.keys(StoryText)[i])
+        for (var i = 0; i < Object.keys(Storys).length; i++) {
+            loadedBooks.push(Object.keys(Storys)[i])
         }
         loadedBooks.sort();
         return loadedBooks;
@@ -51,12 +51,12 @@ class Bookshelf extends Component {
         let searchInput;
         let outputArray = [];
         if (input.target.value !== "") {
-            for (var i = 0; i < Object.keys(StoryText).length; i++) {
-                storyObject = Object.keys(StoryText)[i]
-                for (var j = 0; j < StoryText[storyObject].SearchTerms.length; j++) {
+            for (var i = 0; i < Object.keys(Storys).length; i++) {
+                storyObject = Object.keys(Storys)[i]
+                for (var j = 0; j < Storys[storyObject].SearchTerms.length; j++) {
                     searchInput = input.target.value.toLowerCase();
-                    if (StoryText[storyObject].SearchTerms[j].includes(searchInput) && !(outputArray.some(output => output == storyObject))) {
-                        outputArray = outputArray.concat(StoryText[storyObject].Title)
+                    if (Storys[storyObject].SearchTerms[j].includes(searchInput) && !(outputArray.some(output => output == storyObject))) {
+                        outputArray = outputArray.concat(Storys[storyObject].Title)
                     }
                 }
             }
@@ -75,10 +75,10 @@ class Bookshelf extends Component {
     filterByReadingLevel(level) {
         let outputArray = [];
         if (level != null) {
-            for (var i = 0; i < Object.keys(StoryText).length; i++) {
-                for (var j = 0; j < StoryText[Object.keys(StoryText)[i]].SearchTerms.length; j++) {
-                    if (StoryText[Object.keys(StoryText)[i]].SearchTerms[j] === level) {
-                        outputArray = outputArray.concat(StoryText[Object.keys(StoryText)[i]].Title)
+            for (var i = 0; i < Object.keys(Storys).length; i++) {
+                for (var j = 0; j < Storys[Object.keys(Storys)[i]].SearchTerms.length; j++) {
+                    if (Storys[Object.keys(Storys)[i]].SearchTerms[j] === level) {
+                        outputArray = outputArray.concat(Storys[Object.keys(Storys)[i]].Title)
                     }
                 }
             }
@@ -100,9 +100,9 @@ class Bookshelf extends Component {
                     <img src={banner} className="banner"></img>
                 </div>
                 <div class="w3-bar w3-black">
-                    <button class="w3-bar-item w3-button" onClick={() => {this.filterByReadingLevel(null)}}>Full Bookshelf</button>
-                    <button class="w3-bar-item w3-button" onClick={() => {this.filterByReadingLevel('early readers')}}>Early Readers</button>
-                    <button class="w3-bar-item w3-button" onClick={() => {this.filterByReadingLevel('advanced readers')}}>Advanced Readers</button>
+                    <button class="w3-bar-item w3-button" onClick={() => { this.filterByReadingLevel(null) }}>Full Bookshelf</button>
+                    <button class="w3-bar-item w3-button" onClick={() => { this.filterByReadingLevel('early readers') }}>Early Readers</button>
+                    <button class="w3-bar-item w3-button" onClick={() => { this.filterByReadingLevel('advanced readers') }}>Advanced Readers</button>
                     <input type="text" class="input w3-bar-item w3-right w3-black" onChange={this.filter.bind(this)} placeholder="I'm searching for..." />
                 </div>
 
@@ -113,7 +113,7 @@ class Bookshelf extends Component {
                          */
                         bookArray.map((value, index) => {
                             let path = '/' + value;
-                            return <img key={index} class="bookCover" src={StoryText[value].Cover} onClick={() => this.nextPath('/' + value)} />
+                            return <img key={index} class="bookCover" src={Storys[value].Cover} onClick={() => this.nextPath('/' + value)} />
                         })
                     }
                 </div>
