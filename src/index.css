@@ -1,28 +1,60 @@
-h1, h2, p, ul, li {
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
     font-family: sans-serif;
   }
-  ul.header li {
+
+ul.header li a {
     display: inline;
     list-style-type: none;
     margin: 0;
-  }
-  ul.header {
-    background-color: #98AFC7;
-    padding: 0;
-    width: 120px;
-  }
-  ul.header li a {
     font-weight: bold;
-    text-decoration: none;
-    text-align: center;
-    padding: 20px;
-    display: inline-block;
-  }
-
-.banner {
-  height: 160px;
-  width: 100%;
+  text-align: center;
+  padding: 20px;
+  display: inline-block;
+  text-decoration: none;
 }
+
+ul.header {
+  background-color: #98AFC7;
+  padding: 0;
+  width: 120px;
+  margin-top: -2%;
+  margin-left: -95px;
+  border-radius: 5px;
+  animation: moveIn 1s;
+  position: fixed;
+}
+
+ul.header:hover{
+  animation: moveOut 0.5s;
+  transform: translateX(90px);
+}
+
+h1 {
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: x-large;
+  margin-right: 20px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.headerItem{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
+  background-color: #164C80;
+  font-weight: bold;
+}
+
+.logo {
+  height: 100px;
+  margin-left: 20px;
+}
+
 .bookshelf {
     display: inline;
     margin: 0;
@@ -37,6 +69,7 @@ h1, h2, p, ul, li {
     max-height: 100%;
     border: 0;
     padding: 20px;
+    margin-top: 30px;
 }
 
 .bookCover:hover{
@@ -44,16 +77,19 @@ h1, h2, p, ul, li {
   transform: scale(1.2);
 }
 
-@keyframes growshake {
-  0% { transform: rotate(0deg); }
-  25% {transform: scale(1.2); }
-  50% { transform: scale(1.2) rotate(-1deg); }
-  75% { transform: scale(1.2) rotate(1deg); }
-  100% { transform: scale(1.2) rotate(0deg); }
+.topButton{
+  top: 92%;
+  left: 72%;
+  height: 50px;
+  font-size: x-large;
+  border-radius: 50px;
+  position: fixed;
 }
 
 .mainPane{
-  margin-right: 25%;
+  margin-top: 3%;
+  margin-right: 27%;
+  margin-left: 3%;
 }
 
 .rightPane{
@@ -64,14 +100,29 @@ h1, h2, p, ul, li {
   width: 25%;
   top: 0;
   left: 0;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 50px;
+  padding: 20px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.rightPaneText{
-  font-family: sans-serif;
-  padding-right: 10%; 
+.rightPane::-webkit-scrollbar {
+  display: none;
+}
+
+.defCard{
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #ffffb3 ;
+  text-align: center;
+}
+
+.defCard > div{
+  background-color: #FFEFD5 ;
+}
+
+.defCard > header > p {
+  margin-top: 0;
 }
 
 .btn {
@@ -85,5 +136,27 @@ h1, h2, p, ul, li {
 }
 
 .btn:hover {
-  background: #eee;
+  font-weight: bolder;
+  background-color: #ffffb3;
+  border-radius: 5px;
+}
+
+@keyframes growshake {
+  0% { transform: rotate(0deg); }
+  25% {transform: scale(1.2); }
+  50% { transform: scale(1.2) rotate(-1deg); }
+  75% { transform: scale(1.2) rotate(1deg); }
+  100% { transform: scale(1.2) rotate(0deg); }
+}
+
+@keyframes moveOut {
+  0% {transform: translateX(0);}
+  70% {transform: translateX(95px);}
+  100% {transform: translateX(90px);}
+}
+
+@keyframes moveIn {
+  0% {transform: translateX(90px);}
+  30% {transform: translateX(95px);}
+  100% {transform: translateX(0);}
 }

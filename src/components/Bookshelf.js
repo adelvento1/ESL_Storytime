@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import banner from '../assets/Banner.png';
+import logo from '../assets/logo.png';
 import Storys from '../assets/Storys.js';
 import 'w3-css/w3.css';
 
@@ -55,7 +55,7 @@ class Bookshelf extends Component {
                 storyObject = Object.keys(Storys)[i]
                 for (var j = 0; j < Storys[storyObject].SearchTerms.length; j++) {
                     searchInput = input.target.value.toLowerCase();
-                    if (Storys[storyObject].SearchTerms[j].includes(searchInput) && !(outputArray.some(output => output == storyObject))) {
+                    if (Storys[storyObject].SearchTerms[j].includes(searchInput) && !(outputArray.some(output => output === storyObject))) {
                         outputArray = outputArray.concat(Storys[storyObject].Title)
                     }
                 }
@@ -63,7 +63,7 @@ class Bookshelf extends Component {
         } else {
             outputArray = outputArray.concat(this.initialBookStack());
         }
-        if (outputArray != []) {
+        if (outputArray !== []) {
             outputArray.sort();
             this.setState({
                 filterStoryList: outputArray
@@ -74,7 +74,7 @@ class Bookshelf extends Component {
     }
     filterByReadingLevel(level) {
         let outputArray = [];
-        if (level != null) {
+        if (level !== null) {
             for (var i = 0; i < Object.keys(Storys).length; i++) {
                 for (var j = 0; j < Storys[Object.keys(Storys)[i]].SearchTerms.length; j++) {
                     if (Storys[Object.keys(Storys)[i]].SearchTerms[j] === level) {
@@ -96,14 +96,13 @@ class Bookshelf extends Component {
         let bookArray = this.state.filterStoryList;
         return (
             <div>
-                <div>
-                    <img src={banner} className="banner"></img>
-                </div>
-                <div class="w3-bar w3-black">
-                    <button class="w3-bar-item w3-button" onClick={() => { this.filterByReadingLevel(null) }}>Full Bookshelf</button>
-                    <button class="w3-bar-item w3-button" onClick={() => { this.filterByReadingLevel('early readers') }}>Early Readers</button>
-                    <button class="w3-bar-item w3-button" onClick={() => { this.filterByReadingLevel('advanced readers') }}>Advanced Readers</button>
-                    <input type="text" class="input w3-bar-item w3-right w3-black" onChange={this.filter.bind(this)} placeholder="I'm searching for..." />
+                <div class="w3-bar w3-blue">
+                    <img class="w3-bar-item logo" src={logo}></img>
+                    <h1 class="w3-bar-item"> Stories to <br /> Words </h1>
+                    <button class="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel(null) }}>Full Bookshelf</button>
+                    <button class="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel('early readers') }}>Early Readers</button>
+                    <button class="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel('advanced readers') }}>Advanced Readers</button>
+                    <input type="text" class="input w3-bar-item w3-light-gray headerItem" onChange={this.filter.bind(this)} placeholder="I'm searching for..." />
                 </div>
 
                 <div class="bookshelf">
@@ -112,7 +111,6 @@ class Bookshelf extends Component {
                          * Creates the elements to display the book covers on screen for each book
                          */
                         bookArray.map((value, index) => {
-                            let path = '/' + value;
                             return <img key={index} class="bookCover" src={Storys[value].Cover} onClick={() => this.nextPath('/' + value)} />
                         })
                     }
