@@ -2,7 +2,7 @@ import React from 'react';
 import ProgressBar from "react-scroll-progress-bar";
 import Storys from '../assets/Storys.js';
 import { NavLink } from "react-router-dom";
-import key from '../assets/key.js';
+import DefinitionCard from '../components/DefinitionCard.js'
 
 class StoryPage extends React.Component {
     constructor(props) {
@@ -10,7 +10,8 @@ class StoryPage extends React.Component {
         this.state = {
             story: Storys[this.props.location.pathname.substr(1)],
             storyText: "",
-            loaded: false
+            loaded: false,
+            loadedDefinitions: []
         }
     }
     /**
@@ -32,60 +33,73 @@ class StoryPage extends React.Component {
         if (word === "/n") { return true; }
         else { return false; }
     }
-    /**
-     * Takes in a word and fetches its data from the dictionary api, then returns it 
-     */
-    async getDef(word) {
-        let url = `https://dictionaryapi.com/api/v3/references/learners/json/${word}?key=${key}`
-        let response = await fetch(url);
-        return await response.json();
-    }
-    /**
-     * Takes in word from button, gets data and then shows data for word name and definition to user
-     */
+
     async printWordDef(word) {
-        let data = await this.getDef(word);
-        let wordName;
-        let firstDefinition;
-        if (data[0].meta != undefined && data[0].shortdef.length != 0) {
-            wordName = data[0].meta.id;
-            firstDefinition = data[0].shortdef;
-        }
-        else {
-            wordName = word;
-            firstDefinition = "This word is not found in the dictionary, this could be because it is a name or a word that was created by the author, or it is the past tense of another word."
-        }
-        if (wordName.includes(`:` || `1` || `"` || `'` || `,`)) {
+        let wordName = word;
+        document.getElementById("defaultText").innerHTML = "";
+        console.log(typeof word)
+        console.log(wordName.includes(","))
+        if (wordName.includes(`,`) || 
+        wordName.includes(`:`) ||
+        wordName.includes(`?`) || 
+        wordName.includes(`-`) || 
+        wordName.includes(`1`) || 
+        wordName.includes(`'`) || 
+        wordName.includes(`"`) || 
+        wordName.includes(`)`) ||
+        wordName.includes(`.`) ||
+        wordName.includes(`(`)) {
             wordName = wordName.replace(`:`, "");
+            wordName = wordName.replace(`?`, "");
+            wordName = wordName.replace(`-`, "");
             wordName = wordName.replace(`1`, "");
             wordName = wordName.replace(`'`, "");
             wordName = wordName.replace(`"`, "");
             wordName = wordName.replace(`,`, "");
+            wordName = wordName.replace(`(`, "");
+            wordName = wordName.replace(`)`, "");
+            wordName = wordName.replace(`.`, "");
+
         }
-        document.getElementById("wordName").innerHTML = wordName;
-        document.getElementById("def").innerHTML = "Common Definition: " + firstDefinition;
+        let newDefinitions = this.state.loadedDefinitions.concat(wordName)
+        if(newDefinitions.length > 3){
+            newDefinitions.shift()
+        }
+        this.setState({
+            loadedDefinitions: newDefinitions
+        })
     }
 
     render() {
-        if (this.state.loaded == false) {
+        if (this.state.loaded === false) {
             this.storyToArray(this.state.story)
             return (
                 <div>Loading...</div>
             )
         } else {
             let wordArray = this.state.storyText
+            let cardArray = this.state.loadedDefinitions
             return (
                 <div>
                     <div>
                         <ProgressBar bgcolor="#A3F6A0" duration="1" />
                     </div>
-                    <ul class="header w3-button w3-black">
-                        <li ><NavLink to="/">Bookshelf</NavLink></li>
+                    <ul className="header w3-button w3-black">
+                        <li ><NavLink to="/"> Bookshelf &#x21e6;</NavLink></li>
                     </ul>
-                    <div className="rightPane">
-                        <h3 id="wordName" className="rightPaneText"> Click on a word you dont know and the definition will appear here. <br /> Haz clic en palabra que no sapas y la definición aparecerá aquí </h3>
-                        <h5 id="def" className="rightPaneText"></h5>
+                    <div className="rightPane" id="rightPane">
+                        <h1 id="defaultText">
+                            <br />  Click on any word and the definition will appear here. <br />  <br /> Haga clic en cualquier palabra y la definición aparecerá aquí.
+                        </h1>
+                        <div>
+                            {
+                                  cardArray.map((value, index) => {
+                                    return <DefinitionCard key={index} word={value}></DefinitionCard>
+                                })
+                            }
+                        </div>
                     </div>
+                    <button className="w3-button w3-black topButton" onClick={() => { window.scroll({ top: 0, left: 0, behavior: 'smooth' }); }}> &#x21e7; </button>
                     <div className="mainPane" id="mainPane">
                         <div>
                             {
@@ -96,7 +110,8 @@ class StoryPage extends React.Component {
                                     if (this.isParagraph(value) === false) {
                                         return <input key={index} className="btn" type="button" value={value} onClick={() => this.printWordDef(value)}></input>
                                     } else {
-                                        return <p />
+                                        return <p key={index}/>
+                                        // return <img src={this.state.Illustrations}></img>
                                     }
                                 })
                             }
