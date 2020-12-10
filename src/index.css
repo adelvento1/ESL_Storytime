@@ -7,10 +7,10 @@ body {
   }
 
 ul.header li a {
-    display: inline;
-    list-style-type: none;
-    margin: 0;
-    font-weight: bold;
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  font-weight: bold;
   text-align: center;
   padding: 20px;
   display: inline-block;
@@ -35,7 +35,6 @@ ul.header:hover{
 
 h1 {
   font-weight: bold;
-  margin-top: 5px;
   font-size: x-large;
   margin-right: 20px;
   margin-left: 10px;
@@ -63,13 +62,13 @@ h1 {
 }
 
 .bookCover{
-    width: auto;
-    height: 250px;
-    max-width: 100%;
-    max-height: 100%;
-    border: 0;
-    padding: 20px;
-    margin-top: 30px;
+  width: auto;
+  height: 250px;
+  max-width: 100%;
+  max-height: 100%;
+  border: 0;
+  padding: 20px;
+  margin-top: 30px;
 }
 
 .bookCover:hover{

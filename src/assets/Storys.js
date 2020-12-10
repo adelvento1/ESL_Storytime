@@ -1,22 +1,22 @@
 //Cover Art
-import peterRabbitCover from '../assets/peterRabbitCover.jpg';
-import tortHareCover from '../assets/TortoiseHareCover.jpg';
-import littleRedHenCover from '../assets/littleRedHenCover.jpg';
-import theBlackCatCover from '../assets/theblackcatCover.jpg';
-import RedDeathCover from '../assets/RedDeathCover.jpg';
+import peterRabbitCover from '../assets/PeterRabbit/Cover.jpg';
+import tortHareCover from '../assets/TortoiseAndHare/Cover.jpg';
+import littleRedHenCover from '../assets/RedHen/Cover.jpg';
+import theBlackCatCover from '../assets/BlackCat/Cover.jpg';
+import RedDeathCover from '../assets/RedDeath/Cover.jpg';
 //Story Texts
-import PeterRabbitText from '../assets/PeterRabbitText.txt';
-import Tortoise_and_the_HareText from '../assets/Tortoise_and_the_HareText.txt';
-import Little_Red_HenText from '../assets/Little_Red_HenText.txt';
-import The_Black_CatText from '../assets/The_Black_CatText.txt';
-import The_Black_DeathText from '../assets/The_Black_DeathText.txt';
+import PeterRabbitText from '../assets/PeterRabbit/PeterRabbitText.txt';
+import Tortoise_and_the_HareText from '../assets/TortoiseAndHare/Tortoise_and_the_HareText.txt';
+import Little_Red_HenText from '../assets/RedHen/Little_Red_HenText.txt';
+import The_Black_CatText from '../assets/BlackCat/The_Black_CatText.txt';
+import The_Black_DeathText from '../assets/RedDeath/The_Black_DeathText.txt';
 
 let PeterRabbit = {
     Text: PeterRabbitText,
     SearchTerms: ['children', 'rabbit', 'peter', 'peter rabbit', 'childrens', 'potter', 'beatrix potter', 'bunny', 'early', 'easy', 'early readers'],
     Cover: peterRabbitCover,
     Title: 'PeterRabbit',
-    Illustrations: ['../assets/peterRabbitImage.jpg']
+    Illustrations: [require('../assets/PeterRabbit/Illustrations/peterRabbitImage.jpg')]
 }
 
 let Tortoise_and_the_Hare = {
@@ -26,6 +26,7 @@ let Tortoise_and_the_Hare = {
     Title: 'Tortoise_and_the_Hare',
     Illustrations: []
 }
+
 
 let Little_Red_Hen = {
     Text: Little_Red_HenText,

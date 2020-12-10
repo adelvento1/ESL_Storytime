@@ -34,21 +34,15 @@ class StoryPage extends React.Component {
         else { return false; }
     }
 
+    isPicture(word){
+        if(word === "/pic/"){ return true;}
+        else{return false}
+    }
+
     async printWordDef(word) {
         let wordName = word;
         document.getElementById("defaultText").innerHTML = "";
-        console.log(typeof word)
-        console.log(wordName.includes(","))
-        if (wordName.includes(`,`) || 
-        wordName.includes(`:`) ||
-        wordName.includes(`?`) || 
-        wordName.includes(`-`) || 
-        wordName.includes(`1`) || 
-        wordName.includes(`'`) || 
-        wordName.includes(`"`) || 
-        wordName.includes(`)`) ||
-        wordName.includes(`.`) ||
-        wordName.includes(`(`)) {
+        if (wordName.includes(`,`) || wordName.includes(`:`) || wordName.includes(`?`) || wordName.includes(`-`) || wordName.includes(`1`) || wordName.includes(`'`) || wordName.includes(`"`) || wordName.includes(`)`) || wordName.includes(`.`) || wordName.includes(`(`)) {
             wordName = wordName.replace(`:`, "");
             wordName = wordName.replace(`?`, "");
             wordName = wordName.replace(`-`, "");
@@ -59,10 +53,10 @@ class StoryPage extends React.Component {
             wordName = wordName.replace(`(`, "");
             wordName = wordName.replace(`)`, "");
             wordName = wordName.replace(`.`, "");
-
         }
+
         let newDefinitions = this.state.loadedDefinitions.concat(wordName)
-        if(newDefinitions.length > 3){
+        if (newDefinitions.length > 3) {
             newDefinitions.shift()
         }
         this.setState({
@@ -77,8 +71,9 @@ class StoryPage extends React.Component {
                 <div>Loading...</div>
             )
         } else {
-            let wordArray = this.state.storyText
-            let cardArray = this.state.loadedDefinitions
+            let wordArray = this.state.storyText;
+            let cardArray = this.state.loadedDefinitions;
+            let pictureIndex = -1;
             return (
                 <div>
                     <div>
@@ -93,7 +88,7 @@ class StoryPage extends React.Component {
                         </h1>
                         <div>
                             {
-                                  cardArray.map((value, index) => {
+                                cardArray.map((value, index) => {
                                     return <DefinitionCard key={index} word={value}></DefinitionCard>
                                 })
                             }
@@ -107,10 +102,15 @@ class StoryPage extends React.Component {
                                  * On render - Creates a button for every word in the story string and then makes paragraph changes when the word is a '/n'
                                  */
                                 wordArray.map((value, index) => {
-                                    if (this.isParagraph(value) === false) {
-                                        return <input key={index} className="btn" type="button" value={value} onClick={() => this.printWordDef(value)}></input>
+                                    if (this.isParagraph(value) === true) {
+                                        return <p key={index} />
+                                    } else if (this.isPicture(value) === true){
+                                        pictureIndex++;
+                                        return <img key={index} src={this.state.story.Illustrations[pictureIndex]} alt=""></img>
+                                        
                                     } else {
-                                        return <p key={index}/>
+                                        return <input key={index} className="btn" type="button" value={value} onClick={() => this.printWordDef(value)}></input>
+
                                         // return <img src={this.state.Illustrations}></img>
                                     }
                                 })

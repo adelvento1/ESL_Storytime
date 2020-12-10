@@ -6,6 +6,7 @@ class DefinitionCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            word: "",
             loaded: false,
             definition: "",
             grammer: ""
@@ -41,6 +42,7 @@ class DefinitionCard extends React.Component {
         }
 
         this.setState({
+            word: word,
             definition: firstDefinition,
             loaded: true,
             grammer: firstGrammer
@@ -48,7 +50,7 @@ class DefinitionCard extends React.Component {
     }
 
     render() {
-        if (this.state.loaded === false) {
+        if (this.state.loaded === false || (this.state.word !== this.props.word)) {
             this.printWordDef(this.props.word)
             return (
                 <div>Loading...</div>
