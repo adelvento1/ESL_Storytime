@@ -31,13 +31,18 @@ class DefinitionCard extends React.Component {
      */
     async printWordDef(word) {
         let data = await this.getDef(word);
-        let firstDefinition;
+        console.log(data)
+        let firstDefinition = "";
         let firstGrammer = "";
-        if (data[0].meta !== undefined && data[0].shortdef.length !== 0) {
-            firstDefinition = data[0].shortdef;
-            firstGrammer = data[0].fl
+
+        for(let i = 0; i < data.length; i++){
+            if(data[i].meta !== undefined && data[i].shortdef.length !== 0){
+                firstDefinition = data[i].shortdef;
+                firstGrammer = data[i].fl;
+                break;
+            }
         }
-        else {
+        if(firstDefinition === ""){
             firstDefinition = ["This word is not found in the dictionary, this could be because it is a name or a word that was created by the author, or it is the past tense of another word."]
         }
 
@@ -61,8 +66,8 @@ class DefinitionCard extends React.Component {
                 <div>
                     <div className="w3-card-4 defCard">
                         <header className="w3-container">
-                            <h3>{this.props.word}</h3>
-                            <p>{this.state.grammer}</p>
+                            <button className="moreBtn" onClick={() => alert("more detailed information")}> + </button>
+                            <h3>{this.props.word} <span> ( {this.state.grammer} )</span></h3>
                         </header>
                         <div className="w3-container">
                             {

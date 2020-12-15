@@ -79,7 +79,7 @@ class StoryPage extends React.Component {
                     <div>
                         <ProgressBar bgcolor="#A3F6A0" duration="1" />
                     </div>
-                    <ul className="header w3-button w3-black">
+                    <ul className="bookshelfBtn w3-button w3-green">
                         <li ><NavLink to="/"> Bookshelf &#x21e6;</NavLink></li>
                     </ul>
                     <div className="rightPane" id="rightPane">
@@ -94,7 +94,7 @@ class StoryPage extends React.Component {
                             }
                         </div>
                     </div>
-                    <button className="w3-button w3-black topButton" onClick={() => { window.scroll({ top: 0, left: 0, behavior: 'smooth' }); }}> &#x21e7; </button>
+                    <button className="w3-button w3-green topButton" onClick={() => { window.scroll({ top: 0, left: 0, behavior: 'smooth' }); }}> &#x21e7; </button>
                     <div className="mainPane" id="mainPane">
                         <div>
                             {
@@ -104,14 +104,12 @@ class StoryPage extends React.Component {
                                 wordArray.map((value, index) => {
                                     if (this.isParagraph(value) === true) {
                                         return <p key={index} />
-                                    } else if (this.isPicture(value) === true){
+                                    } else if (this.isPicture(value) === true && !(pictureIndex >= this.state.story.Illustrations.length)){
                                         pictureIndex++;
                                         return <img key={index} src={this.state.story.Illustrations[pictureIndex]} alt=""></img>
                                         
                                     } else {
-                                        return <input key={index} className="btn" type="button" value={value} onClick={() => this.printWordDef(value)}></input>
-
-                                        // return <img src={this.state.Illustrations}></img>
+                                        return <input key={index} className="word" type="button" value={value} onClick={() => this.printWordDef(value)}></input>
                                     }
                                 })
                             }

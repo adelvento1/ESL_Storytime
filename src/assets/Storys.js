@@ -14,14 +14,16 @@ import The_Black_DeathText from '../assets/RedDeath/The_Black_DeathText.txt';
 let PeterRabbit = {
     Text: PeterRabbitText,
     SearchTerms: ['children', 'rabbit', 'peter', 'peter rabbit', 'childrens', 'potter', 'beatrix potter', 'bunny', 'early', 'easy', 'early readers'],
+    Genre: ["picture"],
     Cover: peterRabbitCover,
     Title: 'PeterRabbit',
-    Illustrations: [require('../assets/PeterRabbit/Illustrations/peterRabbitImage.jpg')]
+    Illustrations: [require('../assets/PeterRabbit/Illustrations/peterRabbitImage.jpg'), require('../assets/PeterRabbit/Illustrations/2.jpg'), require('../assets/PeterRabbit/Illustrations/2.jpg')]
 }
 
 let Tortoise_and_the_Hare = {
     Text: Tortoise_and_the_HareText,
     SearchTerms: ['tortoise', 'turtle', 'tortoise and the hare', 'hare', 'race', 'children', 'childrens', 'rabbit', 'bunny', 'early', 'easy', 'early readers'],
+    Genre: ["picture"],
     Cover: tortHareCover,
     Title: 'Tortoise_and_the_Hare',
     Illustrations: []
@@ -31,6 +33,7 @@ let Tortoise_and_the_Hare = {
 let Little_Red_Hen = {
     Text: Little_Red_HenText,
     SearchTerms: ['hen', 'red', 'chicken', 'the little red hen', 'little red hen', 'children', 'childrens', 'early', 'easy', 'early readers'],
+    Genre: ["picture"],
     Cover: littleRedHenCover,
     Title: 'Little_Red_Hen',
     Illustrations: []
@@ -39,6 +42,7 @@ let Little_Red_Hen = {
 let The_Black_Cat = {
     Text: The_Black_CatText,
     SearchTerms: ['cat', 'black cat', 'edgar allen poe', 'the black cat', 'poe', 'advanced readers'],
+    Genre: ["horror"],
     Cover: theBlackCatCover,
     Title: 'The_Black_Cat',
     Illustrations: []
@@ -47,6 +51,7 @@ let The_Black_Cat = {
 let The_Masque_Of_The_Red_Death = {
     Text: The_Black_DeathText,
     SearchTerms: ['death', 'black death', 'edgar allen poe', 'the masque of the red death', 'poe', 'the mask of the red death', 'advanced readers'],
+    Genre: ["horror"],
     Cover: RedDeathCover,
     Title: 'The_Masque_Of_The_Red_Death',
     Illustrations: []

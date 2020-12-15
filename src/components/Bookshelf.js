@@ -96,15 +96,16 @@ class Bookshelf extends Component {
         let bookArray = this.state.filterStoryList;
         return (
             <div>
-                <div class="w3-bar w3-blue">
-                    <img class="w3-bar-item logo" src={logo}></img>
-                    <h1 class="w3-bar-item"> Stories to <br /> Words </h1>
-                    <button class="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel(null) }}>Full Bookshelf</button>
-                    <button class="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel('early readers') }}>Early Readers</button>
-                    <button class="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel('advanced readers') }}>Advanced Readers</button>
-                    <input type="text" class="input w3-bar-item w3-light-gray headerItem" onChange={this.filter.bind(this)} placeholder="I'm searching for..." />
+                <div class="header">
+                    <img src={logo} ></img>
+                    <h1> Stories to <br /> Words </h1>
+                    <div className="w3-bar">
+                        <button className="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel(null) }}>Full Bookshelf</button>
+                        <button className="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel('early readers') }}>Early Readers</button>
+                        <button className="w3-bar-item w3-button headerItem" onClick={() => { this.filterByReadingLevel('advanced readers') }}>Advanced Readers</button>
+                        <input type="text" class="input w3-bar-item w3-light-gray headerItem" onChange={this.filter.bind(this)} placeholder="I'm searching for..." />
+                    </div>
                 </div>
-
                 <div class="bookshelf">
                     {
                         /**
